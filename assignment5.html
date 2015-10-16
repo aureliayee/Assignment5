@@ -1,0 +1,234 @@
+<!--  1.	Add a button to a web page. Use the old school HTML attribute method to attach a click event handler to the button.  That handler should call a function that displays the message “I have been clicked” out into an alert box.-->
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment 5</title>
+</head>
+<body>
+    <script>
+       function writeMessage() {
+        window.alert("I have been clicked");
+    };
+    </script>
+    <button onclick="writeMessage()">Click Me</button>
+</body>
+</html>
+-->
+
+<!--2.	Add a button to a web page and uniquely ID the button. Write a script that finds the button by its ID. Then use the DOM Element method to associate a function with the onclick event of the button. Again, display the message “I have been clicked” out into an alert box.-->
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment 5</title>
+</head>
+<body>
+    <button id="myButton">Click Me</button>
+    <script>
+        var myElement = document.getElementById("myButton");
+        myElement.onclick = function() {
+            window.alert("I have been clicked");
+        };
+    </script>
+</body>
+</html>
+-->
+
+<!--3.	Add a button to a web page and uniquely ID the button. Write a script that attaches an event listener to the button and listens for the click event. When it’s heard, a user-defined function should be called and the message “I have been clicked” should be displayed out into an alert box.-->
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment 5</title>
+</head>
+<body>
+    <button id="myButton">Click Me</button>
+    <script>
+        myButton.addEventListener("click", writeMessage, false);
+        function writeMessage() {
+                  window.alert("I have been clicked");
+        };
+    </script>
+</body>
+</html>
+-->
+
+
+<!--4.	Modify the code within step 3 so that the code that displays an alert box is written directly within a callback function as opposed to a user-defined function.-->
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment 5</title>
+</head>
+<body>
+    <button id="myButton">Click Me</button>
+    <script>
+        myButton.addEventListener("click", function() {
+                  window.alert("I have been clicked");
+        }, false);
+    </script>
+</body>
+</html>
+-->
+
+<!--5.	Modify the code in step 4 so that you can write your script within the <head> tag of the page rather than underneath the button in the markup.-->
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment 5</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", init, false);
+        function init() {
+            myButton.addEventListener("click", function() {
+                  window.alert("I have been clicked");
+            }, false);
+        }
+    </script>
+</head>
+<body>
+    <button id="myButton">Click Me</button>
+</body>
+</html>
+-->
+
+<!--6.	Add a link to your web page. Add the text “Visit Google” to the link, set the ID to “redirect” and set the href attribute to http://www.google.com. Now, write a script that alerts the user that they clicked on the link but prevents the browser from also redirecting to the Google site.-->
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment 5</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", init, false);
+        function init() {
+          redirect.addEventListener("click", function(event) {
+              event.preventDefault();
+              window.alert("You have clicked the link");
+          }, false);
+        };
+    </script>
+</head>
+<body>
+    <a id="redirect" href = "http://www.google.com">Visit Google</a>
+</body>
+</html>
+-->
+
+<!--7.	Add a text box and a button to a web page. Add an event listener to the button. When the click event is heard, the button should be disabled, and the text that the user input into the text box should be displayed within an alert box.-->
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment 5</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", init, false);
+        function init() {
+         myButton.addEventListener("click", function() {
+              myButton.disabled = true;
+              var textBox = document.getElementById("myForm").value;
+              window.alert(textBox);
+          }, false);
+        };
+    </script>
+</head>
+<body>
+    <form>
+        Please enter in some text: <br>
+        <input type=text id="myForm">
+    </form>
+    <br>
+    <button id="myButton">Submit</button>
+</body>
+</html>
+-->
+
+<!--8.	Create a new page called newpage.html. You will now have 2 web pages including index.html and newpage.html. Add a button to index.html. When the button is clicked, newpage.html should appear as a popup window at 300 pixels wide by 300 pixels high. As soon as newpage.html loads however, resize the window to 500 pixels wide by 300 pixels high. You will need to handle the load event on newpage.html and use a BOM method on newpage.html to accomplish this task.-->
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment 5</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", init, false);
+        function init() {
+         myButton.addEventListener("click", function() {
+             window.open("newpage.html", "", "width=300, height=300");
+          }, false);
+        };
+    </script>
+</head>
+<body>
+    <button id="myButton">Click Me</button>
+</body>
+</html>
+-->
+
+<!--9.	Add two buttons to a web page. Add the text Start to one button and Stop to the other button. Using the BOM .setInterval() method, figure out a way to move display the text “Learning JavaScript is fun!” into the console window every 2 seconds but only when the Start button is clicked. If the user clicks on the Stop button, the console should stop logging the text immediately.-->
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment 5</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", init, false);
+        function init() {
+         var x;
+         myButton1.addEventListener("click", function() {
+             x = setInterval(function(){
+                 window.console.log("Learning JavaScript is fun!");
+             }, 2000)
+          }, false);
+         myButton2.addEventListener("click", function() {
+             clearInterval(x);
+          }, false);
+        };
+    </script>
+</head>
+<body>
+    <button id="myButton1">Start</button>
+    <button id="myButton2">Stop</button>
+</body>
+</html>
+-->
+
+<!--10.	Add a drop down list to a web page. Populate the drop down list with 4 items. Add a button next to the drop down list and set the text to “Select”. When the user clicks the button, the item selected in the drop down list should appear within an alert box.
+-->
+
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment 5</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", init, false);
+        function init() {
+         myButton.addEventListener("click", function() {
+             var x = document.getElementById("selectedCar").value;
+             window.alert(x);
+          }, false);
+        };
+    </script>
+</head>
+<body>
+    <select id="selectedCar">
+      <option value="Volvo">Volvo</option>
+      <option value="Saab">Saab</option>
+      <option value="Mercedes">Mercedes</option>
+      <option value="Audi">Audi</option>
+    </select>
+    <button id="myButton">Select</button>
+</body>
+</html>
+-->
